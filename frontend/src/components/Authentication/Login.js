@@ -80,6 +80,7 @@ function Login() {
         <FormLabel>Email</FormLabel>
         <Input
           placeholder="Enter Your Email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
@@ -89,6 +90,7 @@ function Login() {
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter Your Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <InputRightElement width="4.5rem">
