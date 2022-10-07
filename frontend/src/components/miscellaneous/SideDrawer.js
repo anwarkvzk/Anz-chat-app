@@ -1,10 +1,19 @@
 import { Box, Text } from "@chakra-ui/layout";
-import { Avatar, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Tooltip } from "@chakra-ui/react";
+import {
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Tooltip,
+} from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/button";
 import React, { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import ProfileModel from "./ProfileModel";
+import { useHistory } from "react-router-dom";
 
 function SideDrawer() {
   const [search, setSearch] = useState("");
@@ -13,6 +22,11 @@ function SideDrawer() {
   const [loadingChat, setLoadingChat] = useState();
 
   const { user } = ChatState();
+  const history = useHistory();
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    history.push("/");
+  };
   return (
     <>
       <Box
@@ -44,15 +58,19 @@ function SideDrawer() {
           </Menu>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              
-            <Avatar size="sm" cursor="pointer" name={user.name} src={user.pic}/>
+              <Avatar
+                size="sm"
+                cursor="pointer"
+                name={user.name}
+                src={user.pic}
+              />
             </MenuButton>
             <MenuList>
-                <ProfileModel user={user}>
+              <ProfileModel user={user}>
                 <MenuItem>My Profile</MenuItem>
-                </ProfileModel>
-                <MenuDivider />
-                <MenuItem>Log out</MenuItem>
+              </ProfileModel>
+              <MenuDivider />
+              <MenuItem onClick={logoutHandler}>Log out</MenuItem>
             </MenuList>
           </Menu>
         </div>
