@@ -18,7 +18,7 @@ function Login() {
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
   const toast = useToast();
-  const history = useHistory;
+  const history = useHistory();
 
   const handleClick = () => setShow(!show);
   const submitHandler = async () => {
